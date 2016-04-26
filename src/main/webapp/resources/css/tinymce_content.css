@@ -1,0 +1,9 @@
+ @font-face {
+    font-family: Nimbus;
+    src: url(Nimbus_Mono_Bold.otf);
+}
+ body {
+ background-color: #005305;
+ color: white;
+ font-family: Nimbus;
+ }
