@@ -132,7 +132,7 @@
         <!--
         <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
         -->
-
+        <Context docBase="/var/lib/openshift/5718ac722d52719b4c00003b/app-root/data/" path="/static" />
         <!-- RemoteIp valve, pass protocol header from proxy. -
             http://tomcat.apache.org/tomcat-7.0-doc/api/org/apache/catalina/valves/RemoteIpValve.html
         -->
