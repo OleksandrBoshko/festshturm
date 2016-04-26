@@ -3,6 +3,7 @@ package ua.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Files;
 import java.security.Principal;
 
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UploadController {
+	
+	public static final String uploadPath = System.getenv("OPENSHIFT_DATA_DIR") != null ? System.getenv("OPENSHIFT_DATA_DIR") : System.getenv("Temp");
 		
 	@RequestMapping(value = "/upload", headers = "content-type=multipart/*", method = RequestMethod.POST)
-	public String uploadFile(@RequestParam(value = "image", required = false) MultipartFile image, Principal principal){
+	public String uploadFile(@RequestParam(value = "image", required = false) MultipartFile image, Principal principal, String imageType){
+		String prefix = imageType.equals("photo") ? "photo" : "picture";
+		
 		if (!image.isEmpty()) {
 			// Client File Name
             String name = image.getOriginalFilename();
@@ -28,9 +33,9 @@ public class UploadController {
                     byte[] bytes = image.getBytes();
  
                     // Create the file on server
-                    String uploadPath = System.getenv("OPENSHIFT_DATA_DIR") != null ? System.getenv("OPENSHIFT_DATA_DIR") : System.getenv("Temp");
+                    
                     File serverFile = new File(uploadPath
-                             +File.separator + Long.toString(System.currentTimeMillis()) + "-" + name);
+                             +File.separator + prefix + "-" + Long.toString(System.currentTimeMillis()) + "-" + name);
  
                     // Stream to write data to file in server.
                     BufferedOutputStream stream = new BufferedOutputStream(
@@ -47,4 +52,15 @@ public class UploadController {
 		return "redirect:/gallery";
 	}
 	
+	@RequestMapping(value = "/upload/file-delete", method = RequestMethod.GET)
+	public String deleteFile(@RequestParam String image) {
+		System.out.println("hello");
+		File file = new File(uploadPath + File.separator + image);
+		boolean r = file.delete();
+		System.out.println(uploadPath + File.separator + image);
+		
+		return "redirect:/gallery";
+	}
+	
 }
+

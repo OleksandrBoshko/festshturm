@@ -14,8 +14,10 @@
 			action="/upload?${_csrf.parameterName}=${_csrf.token}"
 			enctype="multipart/form-data">
 
-			<input type="file" name="image" value="Upload!" /> <input
-				type="submit" value="Зберегти!" />
+			<input type="file" name="image" value="Upload!" />
+			<input type="radio" name="imageType" value="photo" checked>в галерею<br>
+  			<input type="radio" name="imageType" value="picture">на головну<br> 
+			<input type="submit" value="Зберегти!" />
 		</form>
 		<hr>
 	</security:authorize>
@@ -27,18 +29,18 @@
 				<tr>
 					<td>
 						<img src="/static/${image}" style="width:100px; hight:auto" />
-						<hr style="width: 90%"> <span>/static/${image}</span>
+						<hr style="width: 90%"> 
+						<!-- <span>/static/${image}</span> -->
 					</td>
 				</tr>
-				<!-- 
-								<security:authorize access="hasRole('ROLE_ADMIN')">
+				 
+				<security:authorize access="hasRole('ROLE_ADMIN')">
 					<tr>
-						<c:url value="/iterable/delete-iterable-post/${slug}/${post.id}"
-							var="url" />
-						<td><a href="${url}">Видалити</a></td>
+						<c:url value="/upload/file-delete?image=${image}" var="url" />
+						<td><a href="${url}">Видалити: ${image}</a></td>
 					</tr>
 				</security:authorize>
-				 -->
+				 
 
 			</c:forEach>
 		</table>
