@@ -37,7 +37,7 @@ public class PostService {
 			put("rules", "Правила");
 			put("residency", "Проживання");
 			put("faq", "Часті питання");
-			put("gallery", "Галерея");
+//			put("gallery", "Галерея");
 			put("news", "Новини");
 			put("partners", "Партнери");
 			put("contacts", "Контакти");

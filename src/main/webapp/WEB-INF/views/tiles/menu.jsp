@@ -46,7 +46,7 @@
          					</ul>
        			</li>
 				<li>
-					<a href="/show/gallery/">
+					<a href="/gallery/">
 						<span>Галерея</span>
 					</a>
 				</li>

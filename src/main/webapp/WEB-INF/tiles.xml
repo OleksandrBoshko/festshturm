@@ -48,5 +48,13 @@
 		<put-attribute name="body" value="/WEB-INF/views/iterable.jsp"></put-attribute>
 		<put-attribute name="title" value="Штурм Фест"></put-attribute>
 	</definition>
+	<definition name="upload" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/upload.jsp"></put-attribute>
+		<put-attribute name="title" value="Upload"></put-attribute>
+	</definition>
+	<definition name="gallery" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/gallery.jsp"></put-attribute>
+		<put-attribute name="title" value="Штурм Фест"></put-attribute>
+	</definition>
 	
 </tiles-definitions>
