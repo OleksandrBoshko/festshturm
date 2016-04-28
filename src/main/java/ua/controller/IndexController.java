@@ -1,5 +1,6 @@
 package ua.controller;
 
+import java.io.File;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.entity.Post;
+import com.service.FilesService;
 import com.service.PostService;
 
 @Controller
@@ -28,6 +30,16 @@ public class IndexController {
 	
 	@RequestMapping("/show/{slug}")
 	public String showPost(Model model, @PathVariable String slug) {
+		boolean showSlider = slug.equals("home") ? true : false;
+		if (showSlider){
+			String uploadPath = System.getenv("OPENSHIFT_DATA_DIR") != null ? System.getenv("OPENSHIFT_DATA_DIR") : System.getenv("Temp");
+			File f = new File(uploadPath);
+			ArrayList<String> images = new ArrayList<String>();
+			images.addAll(FilesService.getFilesByWildcard(f, "picture*.jpg"));
+			model.addAttribute("images", images);
+			
+		}
+		model.addAttribute("showSlider", showSlider);
 		model.addAttribute("post", postService.findOneBySlug(slug));
 		return "index";
 	}

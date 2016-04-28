@@ -5,7 +5,22 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<div class="col-sm-8 text-left">
+<div class="col-sm-8 text-center">
+	<div id="carousel" class="carousel slide" data-ride="carousel" style="margin-top: 10px;">
+		<div class="carousel-inner">
+			<c:forEach var="image" items="${images}" varStatus="status">
+				<div class="item ${status.first ? 'active' : ''}">
+					<img src="/static/${image}" style="height: 351px; margin: auto;" />
+				</div>
+			</c:forEach>
+		</div>
+		<a href="#carousel" class="left carousel-control" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+		</a> <a href="#carousel" class="right carousel-control" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</a>
+	</div>
+
 	<c:url value="/upload" var="upload" />
 	<security:authorize access="hasRole('ROLE_ADMIN')">
 		<h2>Адміністрування</h2>

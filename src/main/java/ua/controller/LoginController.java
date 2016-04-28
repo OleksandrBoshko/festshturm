@@ -19,28 +19,6 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String findOneUser(Model model){
 		model.addAttribute("users", userService.getAll());
-		
 		return "login";
-	}
-	
-	@RequestMapping(value = "/xprofile")
-	public String showCabinet(Principal principal){
-		if(principal!=null){
-			return "redirect:/xprofile/" + principal.getName();
-		} else{
-			return "redirect:/";
-		}
-	}
-	
-	@RequestMapping("/xprofile/{userId}")
-	public String showCabinetName(Model model, @PathVariable int userId){
-		User owner = userService.findOneUser(String.valueOf(userId));
-		if (owner == null){
-			return "redirect:/";
-		}
-		model.addAttribute("user", owner);
-		return "xprofile";
-	}
-
-	
+	}	
 }

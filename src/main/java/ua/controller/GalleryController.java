@@ -13,19 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.service.FilesService;
+
 @Controller
 public class GalleryController {
-	
-	private final ArrayList<String> getFilesByWildcard(File path, String wildcard){
-		ArrayList<String> res = new ArrayList<String>();
-		FileFilter fileFilter = new WildcardFileFilter(wildcard);
-		File[] files = path.listFiles(fileFilter);
-		for (int i = 0; i < files.length; i++) {
-			res.add(files[i].getName());
-		}
-		return res;
-	}
-	
 	
 	@RequestMapping(value = "/gallery", method = RequestMethod.GET)
 	public String showGallery(Model model, Principal principal) {
@@ -36,18 +27,12 @@ public class GalleryController {
 		ArrayList<String> images = new ArrayList<String>();
 		
 		if(principal != null){
-			
-			
-			images.addAll(getFilesByWildcard(f, "photo*.jpg"));
-			images.addAll(getFilesByWildcard(f, "picture*.jpg"));
-			
-			
+			images.addAll(FilesService.getFilesByWildcard(f, "photo*.jpg"));
+			images.addAll(FilesService.getFilesByWildcard(f, "picture*.jpg"));
 			
 		} else {
-			images = getFilesByWildcard(f, "photo*.jpg");
+			images = FilesService.getFilesByWildcard(f, "photo*.jpg");
 		}
-//		System.out.println(principal.getName());
-		
 		model.addAttribute("images", images);
 		return "gallery";
 	}

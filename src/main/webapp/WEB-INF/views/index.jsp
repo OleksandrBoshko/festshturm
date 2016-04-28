@@ -4,7 +4,22 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <div class="col-sm-8 text-left">
-	
+<c:if test="${showSlider}">
+	<div id="carousel" class="carousel slide" data-ride="carousel" style="margin-top: 10px;">
+		<div class="carousel-inner">
+			<c:forEach var="image" items="${images}" varStatus="status">
+				<div class="item ${status.first ? 'active' : ''}">
+					<img src="/static/${image}" style="height: 351px; margin: auto;" />
+				</div>
+			</c:forEach>
+		</div>
+		<a href="#carousel" class="left carousel-control" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+		</a> <a href="#carousel" class="right carousel-control" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</a>
+	</div>
+</c:if>	
 	<spring:url value="/{slug}" var="slug">
 		<spring:param name="slug" value="${slug}" />
 	</spring:url>

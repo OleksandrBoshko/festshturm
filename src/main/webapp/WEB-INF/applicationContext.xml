@@ -64,7 +64,7 @@
 	<bean
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 		
-	<!-- 
+	<!--  
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		p:driverClassName="${db.driverClassName}" p:url="${db.databaseurl}"
 		p:username="${db.username}" p:password="${db.password}">
